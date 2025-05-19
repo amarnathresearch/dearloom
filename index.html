@@ -638,27 +638,46 @@
             }
         });
         
-        // Countdown Timer
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 30); // Launch 30 days from now
-        
+                // Countdown Timer for July 1, 2025
+        const launchDate = new Date('July 1, 2025 00:00:00').getTime();
+
         function updateCountdown() {
-            const now = new Date();
+            const now = new Date().getTime();
             const diff = launchDate - now;
             
+            // Calculate time components
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
+            // Update the DOM elements
             document.getElementById('days').innerHTML = days;
-            document.getElementById('hours').innerHTML = hours;
-            document.getElementById('minutes').innerHTML = minutes;
-            document.getElementById('seconds').innerHTML = seconds;
+            document.getElementById('hours').innerHTML = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+            
+            // If the countdown is finished, display a message
+            if (diff < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('days').innerHTML = '00';
+                document.getElementById('hours').innerHTML = '00';
+                document.getElementById('minutes').innerHTML = '00';
+                document.getElementById('seconds').innerHTML = '00';
+                
+                // Optionally update some text to indicate launch has happened
+                const tagline = document.querySelector('.hero-tagline');
+                if (tagline) {
+                    tagline.innerHTML = 'We Are Live!';
+                }
+            }
         }
-        
-        setInterval(updateCountdown, 1000);
+
+        // Initialize countdown immediately
         updateCountdown();
+
+        // Update the countdown every second
+        const countdownTimer = setInterval(updateCountdown, 1000);
         
         // YouTube Video Embed Function
         function embedYouTubeVideo(videoId) {
