@@ -84,7 +84,8 @@
             width: 100%;
             padding: 1.5rem 0;
             z-index: 100;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.7);  /* Initial transparent white background */
         }
         
         header.scrolled {
@@ -222,18 +223,25 @@
             align-items: center;
             font-size: 1.2rem;
             color: #666;
+            overflow: hidden;
+        }
+        
+        .about-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .style-highlight {
             display: flex;
             margin-top: 3rem;
+            gap: 1rem;
         }
         
         .style-item {
             flex: 1;
             padding: 1.5rem;
             background-color: #f9f9f9;
-            margin-right: 1rem;
             border-left: 3px solid var(--accent-color);
         }
         
@@ -341,10 +349,42 @@
             color: #666;
         }
         
-        /* Responsive Styles */
+        /* Enhanced Responsive Styles */
+        /* Large Tablets */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .about-content {
+                gap: 3rem;
+            }
+            
+            .about-image {
+                height: 400px;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+        }
+        
+        /* Medium Tablets */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content {
+                max-width: 100%;
             }
             
             .about-content {
@@ -353,40 +393,135 @@
             }
             
             .about-image {
-                height: 300px;
+                height: 350px;
                 width: 100%;
             }
             
             .style-highlight {
                 flex-direction: column;
+                gap: 1rem;
             }
             
             .style-item {
                 margin-right: 0;
-                margin-bottom: 1rem;
             }
             
             .signup-form {
                 flex-direction: column;
+                width: 100%;
             }
             
             .signup-input {
                 margin-bottom: 1rem;
+                width: 100%;
             }
             
             .footer-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 1.5rem;
             }
             
             .social-links {
-                margin-top: 1.5rem;
                 justify-content: center;
             }
             
             .social-link:first-child {
                 margin-left: 0;
             }
+            
+            .countdown {
+                justify-content: space-around;
+                width: 100%;
+            }
+            
+            .countdown-item {
+                margin-right: 0;
+            }
+        }
+        
+        /* Mobile Devices */
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .hero {
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding: 0 1rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+            
+            .about-image {
+                height: 250px;
+            }
+            
+            .signup-button {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .logo img {
+                width: 150px;
+            }
+            
+            .social-link {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                flex-basis: 45%;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        /* Ensure images are responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Fix for embedded videos */
+        iframe {
+            max-width: 100%;
         }
     </style>
     
@@ -398,16 +533,15 @@
     <!-- Header -->
     <header id="header">
         <div class="container header-content">
-            <a href="#" class="logo"><img src="images/dearloom_logo.png" alt="Logo" class="logo" width="200" /><span>.</span></a>
+            <a href="#" class="logo"><img src="images/dearloom_logo.png" alt="Dear Loom Logo" width="200" /></a>
         </div>
     </header>
     
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-video-container">
-            <!-- Replace with your YouTube video embed -->
             <div class="hero-video-placeholder">
-                <!-- This is where your YouTube video will be embedded -->
+                <!-- YouTube video will be embedded here via JavaScript -->
                 <p>Your Fashion Video Will Appear Here</p>
             </div>
         </div>
@@ -457,7 +591,9 @@
                 </div>
             </div>
             <div class="about-image">
-                <div class="about-image-placeholder"><img src="images/banner-image-6.jpg"/></div>
+                <div class="about-image-placeholder">
+                    <img src="images/banner-image-6.jpg" alt="Fashion Design Showcase"/>
+                </div>
             </div>
         </div>
     </section>
@@ -468,14 +604,19 @@
             <h2>Be The First To Know</h2>
             <p>Sign up to receive updates about our launch, early access to our collections, and exclusive offers. sales@dearloom.com</p>
             
-            
+            <form class="signup-form">
+                <input type="email" class="signup-input" placeholder="Your email address" required>
+                <button type="submit" class="signup-button">Notify Me</button>
+            </form>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
         <div class="container footer-content">
-            <div class="footer-logo"><img src="images/dearloom_logo.png" alt="Logo" class="logo" width="200" /><span></span></div>
+            <div class="footer-logo">
+                <img src="images/dearloom_logo.png" alt="Dear Loom Logo" width="200" />
+            </div>
             <div class="social-links">
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
@@ -522,26 +663,40 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        // YouTube Video Embed Function (Placeholder - will need to be updated with your video ID)
+        // YouTube Video Embed Function
         function embedYouTubeVideo(videoId) {
             const videoContainer = document.querySelector('.hero-video-placeholder');
+            // Check if the device is mobile
+            const isMobile = window.innerWidth <= 768;
+            
             videoContainer.innerHTML = `
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             `;
         }
         
         // Call this function with your YouTube video ID when ready
-        embedYouTubeVideo('aEvWRVzZJAI');
+        // Added window.onload to ensure the DOM is fully loaded
+        window.onload = function() {
+            embedYouTubeVideo('aEvWRVzZJAI');
+            
+            // Check for viewport size changes
+            window.addEventListener('resize', function() {
+                // Re-embed the video if necessary for responsive adjustments
+                embedYouTubeVideo('aEvWRVzZJAI');
+            });
+        };
         
         // Form Submission (Placeholder - will need to be connected to your email service)
         const form = document.querySelector('.signup-form');
         
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            alert(`Thank you! ${email} has been added to our notification list.`);
-            this.reset();
-        });
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                alert(`Thank you! ${email} has been added to our notification list.`);
+                this.reset();
+            });
+        }
     </script>
 </body>
 </html>
